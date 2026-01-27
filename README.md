@@ -12,6 +12,7 @@ IoTHackBot is a collection of specialized tools and Claude Code skills designed 
 
 - **wsdiscovery** - WS-Discovery protocol scanner for discovering ONVIF cameras and IoT devices
 - **iotnet** - IoT network traffic analyzer for detecting protocols and vulnerabilities
+- **netflows** - Network flow extractor with DNS hostname resolution from pcap files
 - **nmap** (skill) - Professional network reconnaissance with two-phase scanning strategy
 
 ### Device-Specific Testing
@@ -107,11 +108,20 @@ onvifscan brute http://192.168.1.100
 
 #### Analyze Network Traffic
 ```bash
-# Analyze PCAP file
+# Analyze PCAP file for IoT protocols
 iotnet capture.pcap
 
 # Live capture
 sudo iotnet -i eth0 -d 60
+```
+
+#### Extract Network Flows
+```bash
+# Extract flows from device with DNS resolution
+netflows capture.pcap --source-ip 192.168.1.100
+
+# Get just hostname:port list
+netflows capture.pcap -s 192.168.1.100 --format quiet
 ```
 
 #### Analyze Firmware
@@ -136,6 +146,7 @@ IoTHackBot is available as a Claude Code plugin, providing AI-assisted security 
 | **jadx** | Android APK decompilation to Java source |
 | **ffind** | Firmware file analysis with filesystem extraction |
 | **iotnet** | IoT network traffic analysis |
+| **netflows** | Network flow extraction with DNS hostname resolution |
 | **nmap** | Professional network reconnaissance |
 | **onvifscan** | ONVIF device security testing |
 | **picocom** | UART console interaction |
